@@ -3,6 +3,7 @@ from django.utils import timezone
 import os
 
 class Job(models.Model):
+    
     name = models.CharField(max_length=255)
     # Add other fields as necessary
 
@@ -10,10 +11,21 @@ class Job(models.Model):
         return self.name
 
 def get_upload_path(instance, filename):
+    # The root folder is 'Jobsite_Photos' (no spaces)
+    root_folder = 'Jobsite_Photos'
+    
+    # Use the job name as part of the path, replacing spaces with underscores
     job_name = instance.job.name.replace(" ", "_")
+    
+    # The photo type (before, during, after, issue)
     photo_type = instance.photo_type
+    
+    # Date when the photo was uploaded
     date_uploaded = timezone.now().strftime("%Y-%m-%d")
-    return os.path.join(f'{job_name}/{photo_type}/{date_uploaded}', filename)
+    
+    # Combine all the components into the desired path
+    return os.path.join(root_folder, f'{job_name}/{photo_type}/{date_uploaded}', filename)
+
 
 class Photo(models.Model):
     PHOTO_TYPE_CHOICES = [
