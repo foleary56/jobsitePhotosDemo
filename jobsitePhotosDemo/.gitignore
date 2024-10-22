@@ -1,0 +1,23 @@
+# .gitignore
+
+# Virtual environment
+venv/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# # Django migrations
+# */migrations/*
+
+# # Database files
+# *.sqlite3
+
+# # Media files
+# media/
+
+# Byte-compiled / optimized / DLL files
+*.pyc
+
+# OS files
+.DS_Store
